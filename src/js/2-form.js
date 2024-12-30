@@ -28,8 +28,17 @@ const formInputSave = event => {
 
 const formInputSubmit = event => {
   event.preventDefault();
-  event.currentTarget.reset();
+  if (
+    Object.values(formData).includes('') ||
+    Object.values(formData).includes(null)
+  ) {
+    alert('Fill please all fields');
+    return;
+  }
+  console.log(formData);
   localStorage.removeItem('feedback-form-state');
+  event.currentTarget.reset();
+  formData = { email: '', message: '' };
 };
 formDataPage.addEventListener('input', formInputSave);
 formDataPage.addEventListener('submit', formInputSubmit);
